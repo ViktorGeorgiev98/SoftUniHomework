@@ -1,0 +1,3 @@
+function cinemaVoucher(input) {
+    
+}
