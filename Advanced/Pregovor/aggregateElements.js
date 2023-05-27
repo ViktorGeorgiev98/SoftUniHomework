@@ -29,5 +29,4 @@ function elements(input) {
         return sum;
     }
 }
-
 elements([1, 2, 3]);
