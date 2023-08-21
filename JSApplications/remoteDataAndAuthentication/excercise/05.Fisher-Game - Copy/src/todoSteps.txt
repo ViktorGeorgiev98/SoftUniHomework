@@ -1,0 +1,24 @@
+TODO:
+
+1/ register page
+- get form data
+- form validation
+- make a post request
+- error handling
+- if request is okay we should save user's data
+2/ login page
+
+3/ logout
+
+4/ polish authentication flows
+4.1 / show/hide content when user is logged in
+- hide register and login button
+- display user email
+- show logout button
+4.2 / show/hide content when user is not logged in
+- hide logout button
+- show register and login buttons
+- display guest instead of user name
+
+
+
