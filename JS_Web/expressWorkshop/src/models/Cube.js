@@ -6,7 +6,13 @@ const cubeSchema = new mongoose.Schema({
     name: {type: String, required: true, minLength: 3},
     description: {type: String, required: true, minLength: 3},
     imageUrl: {type: String, required: true, minLength: 3},
-    difficultyLevel: {type: String, required: true}
+    difficultyLevel: {type: String, required: true},
+    accessories: [
+        {
+          type: mongoose.Types.ObjectId, // type from mongo
+          ref: "Accessory", // the name of the model
+        },
+      ],
 })
 
 const Cube = mongoose.model('Cube', cubeSchema);
