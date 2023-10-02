@@ -4,9 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 
-router.get('/', (request, response) => {
+router.get('/', async (request, response) => {
     response.status(200);
-    const cubes = cubeService.getAllCubes();
+    const cubes = await cubeService.getAllCubes();
     response.render('index', {cubes});
 })
 
@@ -36,6 +36,19 @@ router.get('/about', (request, response) => {
     response.status(200);
     response.render('about');
 })
+
+router.get('/create/accessory', (request, response) => {
+    response.status(200);
+    response.render('createAccessory')
+})
+
+router.get('/attach-accessory/:id', async (request, response) => {
+    const id = request.params.id;
+    const cube = await cubeService.findSingleCube(id);
+    response.render('attachAccessory', { cube });
+})
+
+
 
 router.get('*', (request, response) => {
     response.status(404);

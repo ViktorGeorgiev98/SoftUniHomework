@@ -1,6 +1,6 @@
 // Service for cubes (CREATE NEW ONE AND GET ALL)
 const uniqid = require("uniqid");
-const Cube = require('./models/Cube');
+const Cube = require('./../models/Cube');
 
 
 // const cubes = [
