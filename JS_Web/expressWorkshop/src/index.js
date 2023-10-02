@@ -6,6 +6,7 @@ const express = require('express');
 const expressConfig = require('./config/expressConfig')
 const handlebarsConfig = require('./config/handlebarsConfig');
 const router = require('./router');
+const dbConnect = require('./config/dbConfig')
 // Constants and variables
 const app = express();
 const PORT = 5050;
@@ -16,6 +17,8 @@ expressConfig(app);
 // Handlebars setup
 handlebarsConfig(app);
 
+// DB connection
+dbConnect();
 // Routing
 app.use(router);
 

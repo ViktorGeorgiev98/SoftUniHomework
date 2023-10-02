@@ -15,15 +15,15 @@ router.get('/cubes/create', (request, response) => {
     response.render('create');
 })
 
-router.post('/cubes/create', (request, response) => {
+router.post('/cubes/create', async (request, response) => {
     const formData = request.body;
-    cubeService.create(formData.name,formData.description, formData.imageUrl, formData.difficultyLevel);
+    await cubeService.create(formData.name,formData.description, formData.imageUrl, formData.difficultyLevel);
     response.redirect("/");
 })
 
-router.get('/cubes/:id/details', (request, response) => {
+router.get('/cubes/:id/details', async (request, response) => {
     const id = request.params.id;
-    const currentCube = cubeService.findSingleCube(id);
+    const currentCube = await cubeService.findSingleCube(id);
     console.log(`Current cube is ${currentCube}`)
     if (!currentCube) {
         res.redirect("/404");
