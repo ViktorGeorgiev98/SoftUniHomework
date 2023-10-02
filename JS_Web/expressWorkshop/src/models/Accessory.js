@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const accessorySchema = new mongoose.Schema({
-    name: String,
-    imageUrl: String,
-    description: String,
+    name: {type: String},
+    imageUrl: {type: String},
+    description: {type: String},
     cubes: [
         {
           type: mongoose.Types.ObjectId, // type from mongo
@@ -12,6 +12,6 @@ const accessorySchema = new mongoose.Schema({
       ],
 })
 
-const Accessory = mongoose.model('Acessory', accessorySchema);
+const Accessory = mongoose.model('Accessory', accessorySchema);
 
 module.exports = Accessory;

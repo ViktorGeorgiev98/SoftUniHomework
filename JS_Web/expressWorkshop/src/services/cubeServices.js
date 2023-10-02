@@ -26,6 +26,8 @@ exports.create = async (cubeName, description, imageUrl, difficultyLevel) => {
 }
 
 
+
+
 exports.getAllCubes = async () => {
     return await Cube.find().lean();
 }
@@ -33,4 +35,15 @@ exports.getAllCubes = async () => {
 
 exports.findSingleCube = async (id) => {
     return await Cube.findById(id).lean();
+}
+
+
+exports.attachAccessory = async (cubeId, accessoryId) => {
+    return Cube.findByIdAndUpdate(cubeId, {
+      $push: { accessories: accessoryId },
+    });
+    // const cube = await this.findSingleCube(cubeId);
+    // console.log('cube....', cube)
+    // cube.accessories.push(accessoryId);
+    // cube.save();
 }
