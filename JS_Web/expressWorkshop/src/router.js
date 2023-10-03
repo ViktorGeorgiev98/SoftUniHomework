@@ -32,7 +32,7 @@ router.get('/cubes/:id/details', async (request, response) => {
     }
     const hasAccessories = currentCube.accessories?.length > 0;
     response.status(200);
-    response.render('details', {...currentCube, hasAccessories});
+    response.render('details', { currentCube, hasAccessories });
 })
 router.get('/about', (request, response) => {
     response.status(200);

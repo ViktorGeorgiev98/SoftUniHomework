@@ -34,7 +34,7 @@ exports.getAllCubes = async () => {
 
 
 exports.findSingleCube = async (id) => {
-    return await Cube.findById(id).lean();
+    return await Cube.findById(id).populate("accessories").lean();
 }
 
 
