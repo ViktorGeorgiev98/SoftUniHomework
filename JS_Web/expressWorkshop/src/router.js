@@ -69,6 +69,20 @@ router.post('/attach-accessory/:id', async (request, response) => {
     response.redirect(`/cubes/${cubeId}/details`);
 })
 
+router.get('/delete-cube-page/:id', async (request, response) => {
+    const id = request.params.id;
+    const cubeToDelete = await cubeService.findSingleCube(id);
+    response.status(200);
+    response.render('deleteCubePage', {cubeToDelete});
+})
+
+router.post('/delete-cube-page/:id', async (request, response) => {
+    const id = request.params.id;
+    console.log(`id to delete is ${id}`);
+    await cubeService.deleteCube(id);
+    response.redirect('/');
+})
+
 router.get('*', (request, response) => {
     response.status(404);
     response.render('404')

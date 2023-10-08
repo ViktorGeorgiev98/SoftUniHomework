@@ -47,3 +47,14 @@ exports.attachAccessory = async (cubeId, accessoryId) => {
     // cube.accessories.push(accessoryId);
     // cube.save();
 }
+
+exports.deleteCube = async (cubeId) => {
+    try {
+        if (!Cube.findById) {
+            throw new Error('Cube with this id does not exist')
+        }
+        return await Cube.findByIdAndDelete(cubeId);
+    } catch(e) {
+        console.log(e.message);
+    }
+}
