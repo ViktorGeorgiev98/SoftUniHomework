@@ -58,3 +58,7 @@ exports.deleteCube = async (cubeId) => {
         console.log(e.message);
     }
 }
+
+exports.editCube = async (cubeId, payload) => {
+   await Cube.findByIdAndUpdate (cubeId, payload);
+}

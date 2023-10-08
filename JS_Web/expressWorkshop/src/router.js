@@ -83,6 +83,23 @@ router.post('/delete-cube-page/:id', async (request, response) => {
     response.redirect('/');
 })
 
+router.get('/edit-cube-page/:id', async (request, response) => {
+    const id = request.params.id;
+    const cubeToEdit = await cubeService.findSingleCube(id);
+    // Create an object to hold the selected option based on difficultyLeve
+    response.status(200)
+    response.render('editCubePage', { cubeToEdit });
+})
+
+router.post('/edit-cube-page/:id', async (request, response) => {
+    const id = request.params.id;
+    console.log('id to edit is', id);
+    const { name, description, imageUrl,  difficultyLevel } = request.body;
+    const payload = { name, description, imageUrl,  difficultyLevel }
+    await cubeService.editCube(id, payload);
+    response.redirect(`/cubes/${id}/details`);
+})
+
 router.get('*', (request, response) => {
     response.status(404);
     response.render('404')
