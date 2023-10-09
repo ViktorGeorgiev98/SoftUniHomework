@@ -105,6 +105,11 @@ router.get('/register', (request, response) => {
     response.render('registerPage');
 })
 
+router.get('/login', (request, response) => {
+    response.status(200);
+    response.render('loginPage');
+})
+
 router.get('*', (request, response) => {
     response.status(404);
     response.render('404')
