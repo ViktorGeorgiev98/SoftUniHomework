@@ -100,6 +100,11 @@ router.post('/edit-cube-page/:id', async (request, response) => {
     response.redirect(`/cubes/${id}/details`);
 })
 
+router.get('/register', (request, response) => {
+    response.status(200);
+    response.render('registerPage');
+})
+
 router.get('*', (request, response) => {
     response.status(404);
     response.render('404')
