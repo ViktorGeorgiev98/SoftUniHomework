@@ -1,6 +1,8 @@
 // Router for our applciation
 const cubeService = require('./services/cubeServices');
 const accessoryService = require('./services/accessoryService');
+const userService = require('./services/userService');
+const { register } = require('./utils/utils');
 const express = require('express');
 const router = express.Router();
 
@@ -103,6 +105,14 @@ router.post('/edit-cube-page/:id', async (request, response) => {
 router.get('/register', (request, response) => {
     response.status(200);
     response.render('registerPage');
+})
+
+router.post('/register', async (request, response) => {
+    const { username, password, repeatPassword } = request.body;
+    console.log(username, password, repeatPassword)
+    const newUser = await register(username, password, repeatPassword);
+    response.status(304);
+    response.redirect('/login');
 })
 
 router.get('/login', (request, response) => {
