@@ -2,7 +2,7 @@
 const cubeService = require('./services/cubeServices');
 const accessoryService = require('./services/accessoryService');
 const userService = require('./services/userService');
-const { register } = require('./utils/utils');
+const { register, login } = require('./utils/utils');
 const express = require('express');
 const router = express.Router();
 
@@ -118,6 +118,13 @@ router.post('/register', async (request, response) => {
 router.get('/login', (request, response) => {
     response.status(200);
     response.render('loginPage');
+})
+
+router.post('/login', async (request, response) => {
+    const { username, password } = request.body;
+    await login(username, password);
+    response.status(304);
+    response.redirect('/')
 })
 
 router.get('*', (request, response) => {

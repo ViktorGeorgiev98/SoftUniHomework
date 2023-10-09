@@ -7,3 +7,7 @@ exports.createUser = async (username, password) => {
         password: await bcrypt.hash(password, 10)
     })
 }
+
+exports.findSingleUser = async (username) => {
+    return await User.findOne({ username });
+}
