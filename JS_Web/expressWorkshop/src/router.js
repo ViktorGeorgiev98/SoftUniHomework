@@ -122,8 +122,8 @@ router.get('/login', (request, response) => {
 
 router.post('/login', async (request, response) => {
     const { username, password } = request.body;
-    await login(username, password);
-    response.status(304);
+    const token = await login(username, password);
+    response.cookie("auth", token, {httpOnly: true});
     response.redirect('/')
 })
 

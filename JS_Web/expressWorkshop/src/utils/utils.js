@@ -1,5 +1,7 @@
 const userService = require('../services/userService');
 const bcrypt = require('bcrypt');
+const  SECRET = "e1c22f91-8048-48d5-bda8-6df6897aa326";
+const jwt = require('../lib/jwt');
 exports.register = async (username, password, rePassword) => {
     try {
         if (!username || !password || !rePassword) {
@@ -29,6 +31,14 @@ exports.login = async (username, password) => {
         if (!passwordIsValid) {
             throw new Error('Password is not valid');
         }
+        const payload = {
+            _id: user._id,
+            username: username.username
+        };
+
+        const token = await jwt.sign(payload, SECRET, { expiresIn: "3d"});
+
+        return token;
         
 
     } catch(e) {
