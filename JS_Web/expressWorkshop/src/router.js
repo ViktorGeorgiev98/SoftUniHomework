@@ -127,6 +127,11 @@ router.post('/login', async (request, response) => {
     response.redirect('/')
 })
 
+router.get('/logout', (request, response) => {
+    response.clearCookie('auth');
+    response.redirect('/');
+})
+
 router.get('*', (request, response) => {
     response.status(404);
     response.render('404')
