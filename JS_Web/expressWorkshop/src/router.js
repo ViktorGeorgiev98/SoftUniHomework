@@ -20,7 +20,7 @@ router.get('/cubes/create', (request, response) => {
 
 router.post('/cubes/create', async (request, response) => {
     const formData = request.body;
-    await cubeService.create(formData.name,formData.description, formData.imageUrl, formData.difficultyLevel);
+    await cubeService.create(formData.name,formData.description, formData.imageUrl, formData.difficultyLevel, request.user);
     response.redirect("/");
 })
 
@@ -32,9 +32,16 @@ router.get('/cubes/:id/details', async (request, response) => {
         res.redirect("/404");
         return;
     }
+    let isOwner = false;
+    if(currentCube.owner) {
+        if (currentCube.owner.toString() === request.user._id) {
+            isOwner = true;
+        }
+    }
+    console.log("is owner = ", isOwner);
     const hasAccessories = currentCube.accessories?.length > 0;
     response.status(200);
-    response.render('details', { currentCube, hasAccessories });
+    response.render('details', { currentCube, hasAccessories, isOwner });
 })
 router.get('/about', (request, response) => {
     response.status(200);

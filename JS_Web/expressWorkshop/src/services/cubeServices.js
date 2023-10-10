@@ -14,12 +14,13 @@ const Cube = require('./../models/Cube');
 // ];
 
 
-exports.create = async (cubeName, description, imageUrl, difficultyLevel) => {
+exports.create = async (cubeName, description, imageUrl, difficultyLevel, owner) => {
     const newCube = await Cube.create({
         name: cubeName,
         description: description,
         imageUrl: imageUrl,
-        difficultyLevel: difficultyLevel
+        difficultyLevel: difficultyLevel,
+        owner: owner
     });
 
     return newCube;
