@@ -2,7 +2,7 @@
 const cubeService = require('./services/cubeServices');
 const accessoryService = require('./services/accessoryService');
 const userService = require('./services/userService');
-const { register, login } = require('./utils/utils');
+const { register, login, difficultyLevelOptionsViewData  } = require('./utils/utils');
 const express = require('express');
 const router = express.Router();
 
@@ -33,7 +33,7 @@ router.get('/cubes/:id/details', async (request, response) => {
         return;
     }
     let isOwner = false;
-    if(currentCube.owner) {
+    if(currentCube.owner && request.user) {
         if (currentCube.owner.toString() === request.user._id) {
             isOwner = true;
         }
@@ -95,9 +95,10 @@ router.post('/delete-cube-page/:id', async (request, response) => {
 router.get('/edit-cube-page/:id', async (request, response) => {
     const id = request.params.id;
     const cubeToEdit = await cubeService.findSingleCube(id);
-    // Create an object to hold the selected option based on difficultyLeve
+    const options = difficultyLevelOptionsViewData(cubeToEdit.difficultyLevel);
+    // Create an object to hold the selected option based on difficultyLevel
     response.status(200)
-    response.render('editCubePage', { cubeToEdit });
+    response.render('editCubePage', { cubeToEdit, options });
 })
 
 router.post('/edit-cube-page/:id', async (request, response) => {
