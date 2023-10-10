@@ -24,6 +24,7 @@ exports.login = async (username, password) => {
         }  
 
         const user = await userService.findSingleUser(username);
+        console.log({ user });
         if (!user) {
             throw new Error('User not found');
         }
@@ -33,7 +34,7 @@ exports.login = async (username, password) => {
         }
         const payload = {
             _id: user._id,
-            username: username.username
+            username: user.username
         };
 
         const token = await jwt.sign(payload, SECRET, { expiresIn: "3d"});
