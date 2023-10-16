@@ -3,7 +3,7 @@
 
 
 const mongoose = require('mongoose');
-const URL = "mongodb://localhost:27017/Cubicle"	
+const URL = "mongodb://localhost:27017/Cubicle"	// mongodb://localhost:27017/wizardSchool
 
 async function dbConnect() {
     try {
