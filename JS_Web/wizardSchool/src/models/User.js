@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, 'First Name is required'],
+        minLength: [3, 'First name needs to be longer']
     },
     lastName: {
         type: String,
@@ -15,10 +16,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Email is required'],
         unique: [true, 'Email already exists'],
+        minLength: [10, 'Email needs to be longer']
     },
     password: {
         type: String,
         required: [true, 'Password is required'],
+        minLength: [4, 'Password needs to be longer']
     }
 });
 
