@@ -2,6 +2,7 @@ const router = require('express').Router();
 const userServices = require('../services/userService');
 const { extractErrorMessage } = require('../utils/errorHandler');
 
+
 router.get('/register', (req, res) => {
     res.render('register')
 });
@@ -14,7 +15,6 @@ router.post('/register', async (req, res) => {
             throw new Error('Password missmatch!');
         }
         const newUser = await userServices.register(firstName, lastName, email, password);
-        console.log(newUser);
         res.status(304);
         res.redirect('/user/login');
     } catch(e) {
@@ -28,6 +28,26 @@ router.post('/register', async (req, res) => {
 
 router.get('/login', (req, res) => {
     res.render('login');
+})
+
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const token = await userServices.login(email, password);
+        res.cookie("auth", token, {httpOnly: true});
+        res.redirect('/')
+
+    } catch(e) {
+        console.log(e.message);
+        const errorMessages = extractErrorMessage(e);
+        res.render('login', { errorMessages })
+    }
+})
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('auth');
+    res.status(304);
+    res.redirect('/')
 })
 
 module.exports = router;
