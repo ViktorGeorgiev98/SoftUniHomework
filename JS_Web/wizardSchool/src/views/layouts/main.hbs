@@ -29,17 +29,20 @@
             <ul class="menu">
                 <li><a href="/">Home</a></li>
                 <li><a href="/posts/all">All Posts</a></li>
+                {{#if isAuthenticated}}
                 <!-- Logged users -->
                 <li><a href="/posts/create">Create Post</a></li>
                 <li><a href="/user/profile">Profile</a></li>
                 <li><a href="/user/logout">Logout</a></li>
+                {{else}}
                 <!-- Guest users -->
                 <li><a href="/user/register">Register</a></li>
                 <li><a href="/user/login">Login</a></li>
+                {{/if}}
             </ul>
 
         </nav>
-        
+
 
        {{#each errorMessages}}
         <div class="error-container">

@@ -6,6 +6,7 @@ const { PORT, URL } = require('./constants')
 const cookieParser = require('cookie-parser');
 const handlebars = require('express-handlebars');
 const routing = require('./router');
+const { auth } = require('./middleware/auth');
 
 // constants and variables
 const app = express();
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.resolve(__dirname, './public')));
 app.use(cookieParser());
+app.use(auth);
 // handlebars config
 app.engine('hbs', handlebars.engine({extname: 'hbs'}));
 app.set('view engine', 'hbs');

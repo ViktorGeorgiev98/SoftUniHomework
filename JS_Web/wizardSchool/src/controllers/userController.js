@@ -15,8 +15,11 @@ router.post('/register', async (req, res) => {
             throw new Error('Password missmatch!');
         }
         const newUser = await userServices.register(firstName, lastName, email, password);
+        const token = await userServices.login(email, password);
+        res.cookie("auth", token, {httpOnly: true});
         res.status(304);
-        res.redirect('/user/login');
+        res.redirect('/')
+       
     } catch(e) {
         console.log(e.message);
         res.status(404);
