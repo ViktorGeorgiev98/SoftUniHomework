@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 const urlValidator = (url) => {
-    return /^https?:\/\//.test(url);
+    return /^http:\/\/|^https:\/\//.test(url);
   };
 
 

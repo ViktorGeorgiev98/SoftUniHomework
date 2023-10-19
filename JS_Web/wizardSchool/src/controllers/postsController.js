@@ -42,9 +42,14 @@ router.get('/:id/details', async (req, res) => {
                 isOwner = true;
             }
         }
+       
+        const hasVoted = creature.votes?.some((v) => v?._id.toString() === req.user?._id);
+        const joinedEmailsOfOwners = creature.votes.map(v => v.email).join(', ');
+       
+
         console.log("is owner = ", isOwner);
         res.status(200);
-        res.render('details', { creature, isOwner });
+        res.render('details', { creature, isOwner, hasVoted, joinedEmailsOfOwners });
     } catch(e) {
         console.log(e.message);
         res.status(404);
@@ -98,6 +103,14 @@ router.post('/:id/edit', async (req, res) => {
         console.log('Current error is: ',errorMessages)
         res.render(`details`, { errorMessages })
     }
+})
+
+router.get('/:id/vote', async (req, res) => {
+    const id = req.params.id;
+    const userId = req.user._id;
+    await creatureService.addVotes(id, userId);
+
+    res.redirect(`/posts/${id}/details`);
 })
 
 module.exports = router;

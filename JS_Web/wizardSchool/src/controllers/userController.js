@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const userServices = require('../services/userService');
 const { extractErrorMessage } = require('../utils/errorHandler');
+const creatureService = require('../services/creatureService');
 
 
 router.get('/register', (req, res) => {
@@ -51,6 +52,13 @@ router.get('/logout', (req, res) => {
     res.clearCookie('auth');
     res.status(304);
     res.redirect('/')
+})
+
+router.get('/profile', async (req, res) => {
+    const { user } = req;
+    const myCreatures = await creatureService.getMyCreatures(user?._id);
+    const author = req.user.firstName + " " + req.user.lastName;
+    res.render('profile', {myCreatures});
 })
 
 module.exports = router;
